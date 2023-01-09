@@ -1,0 +1,103 @@
+#+title:  gccrs in 2022
+#+author: Philip Herron and Arthur Cohen
+#+date:   2021-12-17
+
+* Overview
+
+Thanks again to [[https://opensrcsec.com/][Open Source Security, inc]] and [[https://www.embecosm.com/][Embecosm]] for their ongoing support for this project.
+
+** December
+
+- 2022 year report to be uploaded soon
+- Merged the frontend upstream! 47 commits containing an early version of our compiler
+- Starting the process of updating GCC's master branch with our dev branch
+    - Discussion on how to go about this
+        - We want to make sure to preserve authorship of the work done
+    - We have roughly 4 months of work to upstream
+    - This comes down to 250 commits
+    - 250 commits to bootstrap & test, maybe merge together, and write Changelog entries for
+    - I expect most of the changes to not need a review
+        - Some select commits interacting with common GCC parts will still get reviewed
+        - Obviously any commit which touches something other than ~gcc/rust/~ will be asked for review
+    - Working with Marc Poulhies (Ada frontend) to get through them
+- A lot of time in December was spent on holidays :)
+- Upcoming work:
+    - Finish macro expansion system in parallel of updating the frontend
+    - Put together milestones for updating upstream and continuing development work
+    - Finish compilation of libcore 1.49
+    - Start working on libproc
+
+** ~gccrs~ in 2022
+
+- Overall, we have merged 474 PRs in 2022
+- From 47 different contributors!
+
+*** Lines of Code (LoC)
+
+| Language              | Files   | Blanks | Comments | Code  |
+|-----------------------+---------+--------+----------+-------|
+|C Header               |     152 |  13217 |    11300 | 49269 |
+|C++                    |      99 |  11756 |     8417 | 58314 |
+|Rust                   |      39 |    792 |      851 |  5077 |
+|Markdown               |      19 |    274 |        0 |   691 |
+|TOML                   |       5 |      4 |        0 |    47 |
+|Autoconf               |       2 |     79 |      118 |   248 |
+|Shell                  |       2 |     19 |       14 |   110 |
+|gitignore              |       2 |      0 |        0 |     6 |
+|License                |       1 |      2 |        0 |    21 |
+|Module-Definition      |       1 |     11 |        0 |    41 |
+|Python                 |       1 |     40 |        9 |   122 |
+|YAML                   |       1 |     12 |        0 |    63 |
+|-----------------------+---------+--------+----------+-------|
+|Total                  |     324 |  26206 |    20709 |114009 |
+
+*** Overall Task Status
+
+| Category    | Dec 2021 | Dec 2022 | Delta |
+|-------------+----------+----------+-------|
+| TODO        |       88 |      186 |   +98 |
+| In Progress |       16 |       32 |   +16 |
+| Completed   |      257 |      500 |  +243 |
+
+*** Test Cases
+
+| TestCases | Dec 2021 | Dec 2022 | Delta |
+|-----------+----------+----------+-------|
+| Passing   | 5411     | 6976     | +1565 |
+| Failed    | -        | -        |     - |
+| XFAIL     | 21       | 52       |   +31 |
+| XPASS     | -        | -        |     - |
+
+*** Bugs
+
+| Category    | Dec 2021 | Dec 2022 | Delta |
+|-------------+----------+----------+-------|
+| TODO        |       24 |       55 |   +31 |
+| In Progress |        4 |       16 |   +12 |
+| Completed   |       90 |      218 |  +128 |
+
+*** Milestones Progress
+
+| Milestone                         | Dec 2021 | Dec 2022 | Delta | Start Date     | Completion Date | Target        |
+|-----------------------------------+----------+----------+-------+----------------+-----------------+---------------|
+| Data Structures 1 - Core          |     100% |     100% | -     | 30th Nov 2020  | 27th Jan 2021   | 29th Jan 2021 |
+| Control Flow 1 - Core             |     100% |     100% | -     | 28th Jan 2021  | 10th Feb 2021   | 26th Feb 2021 |
+| Data Structures 2 - Generics      |     100% |     100% | -     | 11th Feb 2021  | 14th May 2021   | 28th May 2021 |
+| Data Structures 3 - Traits        |     100% |     100% | -     | 20th May 2021  | 17th Sept 2021  | 27th Aug 2021 |
+| Control Flow 2 - Pattern Matching |     100% |     100% | -     | 20th Sept 2021 | 9th Dec 2021    | 29th Nov 2021 |
+| Macros and cfg expansion          |       0% |     100% | +100% | 1st Dec 2021   | 31st Mar 2022   | 28th Mar 2022 |
+| Imports and Visibility            |       0% |     100% | +100% | 29th Mar 2022  | 13th Jul 2022   | 27th May 2022 |
+| Const Generics                    |       0% |     100% | +100% | 30th May 2022  | 10th Oct 2022   | 17th Oct 2022 |
+| Initial upstream patches          |       0% |     100% | +100% | 10th Oct 2022  | 13th Nov 2022   | 13th Nov 2022 |
+| Upstream initial patchset         |       8% |      79% | +79%  | 13th Nov 2022  | -               | 19th Dec 2022 |
+| Final set of upstream patches     |       0% |      21% | +21%  | 16th Nov 2022  | -               | 30th Apr 2023 |
+| Intrinsics and builtins           |       0% |      18% | +18%  | 6th Sept 2022  | -               | TBD           |
+| Borrow checking                   |       0% |       0% | -     | TBD            | -               | TBD           |
+| Const Generics 2                  |       0% |       0% | -     | TBD            | -               | TBD           |
+| Rust-for-Linux compilation        |       0% |       0% | -     | TBD            | -               | TBD           |
+
+*** Risks
+
+| Risk                           | Impact (1-3) | Likelihood (0-10) | Risk (I * L) | Mitigation                                     |
+|--------------------------------+--------------+-------------------+--------------+------------------------------------------------|
+| Missing GCC 13 upstream window |            2 |                 3 |            6 | Merge in GCC 14 and be proactive about reviews |
